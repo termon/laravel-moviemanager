@@ -12,6 +12,6 @@ This project is a generic application that is implemented in a range of web fram
 The application has been implemented in
 
 - [NextJS](https://github.com/termon/nextjs-moviemanager)
-- [SpringBoot](https://github.com/termon/spring-boot-moviemanager)
+- [SpringBoot](https://github.com/termon/springboot-moviemanager)
 - [Laravel](https://github.com/termon/laravel-moviemanager)
 - [.NET](https://github.com/termon/dotnet-moviemanager)
