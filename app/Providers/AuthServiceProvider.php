@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->role === 'ADMIN') ;
         });
         Gate::define('update-movie', function ($user) {
-            return ($user->role === 'ADMIN' || $user->role === 'USER') ;
+            return ($user->role === 'ADMIN') ;
         });
 
         Gate::define('create-review', function ($user) {

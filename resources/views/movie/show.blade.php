@@ -32,7 +32,9 @@
         </div>
 
         <div class="pt-2">
+            @can('update-movie',$movie)
             <x-link colour="blue"  href="{{route('movies.edit', ['id'=>$movie->id])}}" >Edit</x-link>
+            @endcan()
             <x-link colour="green" href="{{route('movies.add.review', ['id'=>$movie->id])}}">Add Review</x-link>
             <x-link colour="orange"  href="{{route('movies.index')}}" >Movies</x-link>
         </div>
@@ -47,12 +49,14 @@
                 <x-table.td>{{$review->rating}}</x-table.td>
                 <x-table.td>{{$review->comment}}</x-table.td>
                 <x-table.td>{{$review->on}}</x-table.td>
+                @can('delete_review',$review)
                 <x-table.td>
                     <form action="{{route('movies.destroy.review',[$movie->id, $review->id])}}" method="post">
                         @csrf @method('DELETE')
                         <x-button>Delete</x-button>
                     </form>
                 </x-table.td>
+                @endcan()
             </x-table.tr>
             @endforeach
             </tbody>

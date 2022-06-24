@@ -24,12 +24,16 @@
                         <a href="{{route('movies.show',   ['id'=>$movie->id])}}" class="btn btn-sm btn-warning">
                             <x-heroicon-o-view-list class="mr-3" />
                         </a>
+                        @can('update-movie',$movie)
                         <a href="{{route('movies.edit',   ['id'=>$movie->id])}}" class="btn btn-sm btn-primary">
                             <x-heroicon-o-pencil class="mr-3" />
                         </a>
+                        @endcan()
+                        @can('update-movie',$movie)
                         <a href="{{route('movies.delete', ['id'=>$movie->id])}}" class="btn btn-sm btn-danger">
                             <x-heroicon-o-trash />
                         </a>
+                        @endcan()
                     </x-table.td>
                 </x-table-tr>
             @endforeach
