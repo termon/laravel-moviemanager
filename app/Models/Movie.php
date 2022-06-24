@@ -37,7 +37,8 @@ class Movie extends Model
     }
 
     public function getGenreDisplay() {
-        $g = new Genre($this->genre);
+        $g = Genre::from($this->genre);
+        //$g = new Genre($this->genre);
         return $g->getValue();
     }
 }
