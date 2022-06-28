@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Movie;
 use App\Models\Review;
-use App\Rules\UrlValidator;
 use App\Services\IMovieService;
-use App\Services\MovieServiceEloquent;
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\ReviewStoreRequest;
-use App\Enums\Genre;
+
+use Prologue\Alerts\Facades\Alert;
 
 class MovieController extends Controller
 {
@@ -69,6 +68,7 @@ class MovieController extends Controller
         // only store validated data
         $movie = $this->svc->createMovie($request->validated());
 
+        Alert::add('success', 'Movie added')->flash();
         return redirect()->route('movies.show', ['id'=>$movie->id])->with('success',"Movie created successfully");
     }
 
@@ -83,6 +83,7 @@ class MovieController extends Controller
         $movie = $this->svc->findMovieById($id);
         if (!$movie)
         {
+
             abort(404);
         }
         return view('movie.show', ['movie' => $movie]);
@@ -120,6 +121,7 @@ class MovieController extends Controller
         // only access validated data
         $movie = $this->svc->updateMovie($id, $request->validated());
 
+        Alert::add('success', 'Movie updated')->flash();
         return redirect()->route('movies.show', ['id'=>$movie->id])->with('success',"Movie updated successfully");
     }
 
@@ -155,6 +157,8 @@ class MovieController extends Controller
         if ($this->svc->deleteMovie($id)) {
             return redirect()->route('movies.index')->with('success','Movie deleted successfully!');
         }
+
+        Alert::add('success', 'Movie deleted')->flash();
         return redirect()->route('movies.index')->with('error','Problem deleting movie');
     }
 
@@ -182,7 +186,7 @@ class MovieController extends Controller
     {
         $this->authorize('create-review');
         $review = $this->svc->addReview($request->validated());
-
+        Alert::add('success', 'Review added')->flash();
         return redirect()->route('movies.show', ['id'=>$review->movie_id])->with('success','Review added successfully');
     }
 
@@ -198,7 +202,7 @@ class MovieController extends Controller
         $this->authorize('delete-review');
 
         $this->svc->deleteReview($review_id);
-
+        Alert::add('success', 'Review removed')->flash();
         return redirect()->route('movies.show',$movie_id)->with('success','Review deleted successfully');
     }
 }

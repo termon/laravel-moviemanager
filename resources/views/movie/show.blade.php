@@ -49,7 +49,7 @@
                 <x-table.td>{{$review->rating}}</x-table.td>
                 <x-table.td>{{$review->comment}}</x-table.td>
                 <x-table.td>{{$review->on}}</x-table.td>
-                @can('delete_review',$review)
+                @can('delete-review',$review)
                 <x-table.td>
                     <form action="{{route('movies.destroy.review',[$movie->id, $review->id])}}" method="post">
                         @csrf @method('DELETE')

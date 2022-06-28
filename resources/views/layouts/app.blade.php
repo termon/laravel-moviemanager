@@ -29,6 +29,10 @@
 
             <!-- Page Content -->
             <main>
+                <div class="container mx-auto my-10 px-4">
+                    <x-alert />
+                </div>
+
                 {{ $slot }}
             </main>
         </div>
